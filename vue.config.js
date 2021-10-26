@@ -75,7 +75,7 @@ module.exports = {
       .options({
         symbolId: "icon-[name]",
       })
-      .end()
+      .end();
 
     // set preserveWhitespace
     config.module

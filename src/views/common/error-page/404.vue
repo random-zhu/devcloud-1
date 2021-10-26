@@ -2,16 +2,39 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img class="pic-404__parent" src="@/assets/404_images/404.png" alt="404">
-        <img class="pic-404__child left" src="@/assets/404_images/404_cloud.png" alt="404">
-        <img class="pic-404__child mid" src="@/assets/404_images/404_cloud.png" alt="404">
-        <img class="pic-404__child right" src="@/assets/404_images/404_cloud.png" alt="404">
+        <img
+          class="pic-404__parent"
+          src="@/assets/404_images/404.png"
+          alt="404"
+        />
+        <img
+          class="pic-404__child left"
+          src="@/assets/404_images/404_cloud.png"
+          alt="404"
+        />
+        <img
+          class="pic-404__child mid"
+          src="@/assets/404_images/404_cloud.png"
+          alt="404"
+        />
+        <img
+          class="pic-404__child right"
+          src="@/assets/404_images/404_cloud.png"
+          alt="404"
+        />
       </div>
       <div class="bullshit">
         <div class="bullshit__oops">页面不存在!</div>
         <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">请确认你输入URL是否正确, 或者点击下面的按钮返回首页.</div>
-        <a style="cursor:pointer" @click="$router.push({path: '/'})" class="bullshit__return-home">返回首页</a>
+        <div class="bullshit__info">
+          请确认你输入URL是否正确, 或者点击下面的按钮返回首页.
+        </div>
+        <a
+          style="cursor: pointer"
+          @click="$router.push({ path: '/' })"
+          class="bullshit__return-home"
+          >返回首页</a
+        >
       </div>
     </div>
   </div>
@@ -19,18 +42,18 @@
 
 <script>
 export default {
-  name: 'Page404',
+  name: "Page404",
   computed: {
     message() {
-      return '对不起，您请求的页面不存在、或已被删除、或暂时不可用...'
-    }
-  }
-}
+      return "对不起，您请求的页面不存在、或已被删除、或暂时不可用...";
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.wscn-http404-container{
-  transform: translate(-50%,-50%);
+.wscn-http404-container {
+  transform: translate(-50%, -50%);
   position: absolute;
   top: 40%;
   left: 50%;

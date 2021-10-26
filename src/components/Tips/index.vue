@@ -1,49 +1,48 @@
 <template>
   <div v-if="!hidden" class="tips">
     <div class="titile">
-        <div class="tips-icon">
-            <svg-icon icon-class="tips-info"></svg-icon>
-        </div>
-        <span class="title-content">
-            {{ title }}
-        </span>
-        <span class="close-btn">
-          <i class="el-icon-close" @click="handleClose" />
-        </span>
-        
+      <div class="tips-icon">
+        <svg-icon icon-class="tips-info"></svg-icon>
+      </div>
+      <span class="title-content">
+        {{ title }}
+      </span>
+      <span class="close-btn">
+        <i class="el-icon-close" @click="handleClose" />
+      </span>
     </div>
     <div class="content">
-        <li v-for="(item, i) in tips" :key="i" class="tip-item"> {{item}} </li>
+      <li v-for="(item, i) in tips" :key="i" class="tip-item">{{ item }}</li>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Tips',
+  name: "Tips",
   props: {
     title: {
       type: String,
-      default: '温馨提示',
+      default: "温馨提示",
     },
     tips: {
       type: Array,
       default() {
-        return []
-      }
-    }
+        return [];
+      },
+    },
   },
   data() {
     return {
       hidden: false,
-    }
+    };
   },
   methods: {
     handleClose() {
-      this.hidden = true
-    }
-  }
-}
+      this.hidden = true;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

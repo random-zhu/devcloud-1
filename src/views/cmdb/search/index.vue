@@ -1,14 +1,12 @@
 <template>
-  <div class="cmdb-search-container">
-    CMDB Search页面
-  </div>
+  <div class="cmdb-search-container">CMDB Search页面</div>
 </template>
 
 <script>
 export default {
-  name: 'Search',
+  name: "Search",
   data() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
