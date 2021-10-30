@@ -2,7 +2,8 @@
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="1-4-1"
+        default-active="/host"
+        :default-openeds="['/host']"
         class="sidebar-el-menu"
         :collapse="isCollapse"
         router
@@ -15,7 +16,7 @@
           </template>
           <!-- 导航条目 -->
           <el-menu-item index="/cmdb/search">资源检索</el-menu-item>
-          <el-menu-item index="/cmdb/host">主机</el-menu-item>
+          <el-menu-item index="/cmdb/host/list">主机</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-scrollbar>

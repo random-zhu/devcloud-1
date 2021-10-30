@@ -34,8 +34,13 @@ const routes = [
         name: "ResourceSearch",
       },
       {
-        path: "host",
+        path: "host/list",
         component: () => import("@/views/cmdb/host/index"),
+        name: "ResourceHost",
+      },
+      {
+        path: "host/detail",
+        component: () => import("@/views/cmdb/host/detail"),
         name: "ResourceHost",
       },
     ],

@@ -12,10 +12,15 @@
       <div class="op"></div>
     </div>
     <div class="box-shadow">
-      <el-table :data="hosts" style="width: 100%">
+      <el-table :data="hosts" v-loading="fetchHostLoading" style="width: 100%">
         <el-table-column prop="name" label="名称">
           <template slot-scope="{ row }">
-            {{ row.resource_id }} <br />
+            <router-link
+              :to="{ path: '/cmdb/host/detail', query: { id: row.id } }"
+            >
+              {{ row.resource_id }}
+            </router-link>
+            <br />
             {{ row.name }}
           </template>
         </el-table-column>
@@ -57,7 +62,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="操作" align="center" label="状态">
-          <template slot-scope="{ row }">
+          <template>
             <el-button type="text" disabled>归档</el-button>
             <el-button type="text" disabled>监控</el-button>
           </template>
@@ -72,7 +77,6 @@
         @pagination="get_hosts"
       />
     </div>
-    Host 页面
   </div>
 </template>
 
@@ -90,6 +94,7 @@ export default {
     return {
       tips: tips,
       query: { page_size: 20, page_number: 1, keywords: "" },
+      fetchHostLoading: false,
       total: 0,
       hosts: [],
     };
@@ -99,10 +104,19 @@ export default {
   },
   methods: {
     async get_hosts() {
-      const resp = await LIST_HOST(this.query);
-      console.log(resp);
-      this.hosts = resp.data.items;
-      this.total = resp.data.total;
+      this.fetchHostLoading = true;
+      try {
+        const resp = await LIST_HOST(this.query);
+        this.hosts = resp.data.items;
+        this.total = resp.data.total;
+      } catch (error) {
+        this.$notify.error({
+          title: "获取主机异常",
+          message: error,
+        });
+      } finally {
+        this.fetchHostLoading = false;
+      }
     },
     handleSizeChange(val) {
       this.query.page_size = val;
