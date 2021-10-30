@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { Search } from "@/api/cmdb/resource";
+import { SEARCH } from "@/api/cmdb/resource";
 import Pagination from "@/components/Pagination";
 
 export default {
@@ -91,7 +91,7 @@ export default {
     async search() {
       this.fetchResourceLoading = true;
       try {
-        const resp = await Search(this.query);
+        const resp = await SEARCH(this.query);
         this.resources = resp.data.items;
         this.total = resp.data.total;
       } catch (error) {

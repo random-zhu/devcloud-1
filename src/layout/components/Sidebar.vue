@@ -18,6 +18,15 @@
           <el-menu-item index="/cmdb/search">资源检索</el-menu-item>
           <el-menu-item index="/cmdb/host/list">主机</el-menu-item>
         </el-submenu>
+        <el-submenu index="/sync">
+          <!-- 添加个title -->
+          <template slot="title">
+            <i class="el-icon-s-tools"></i>
+            <span slot="title">资源同步</span>
+          </template>
+          <!-- 导航条目 -->
+          <el-menu-item index="/cmdb/sync/list">凭证管理</el-menu-item>
+        </el-submenu>
       </el-menu>
     </el-scrollbar>
   </div>

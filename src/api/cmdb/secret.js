@@ -1,8 +1,8 @@
 import request from "@/api/client";
 
-export function SEARCH(params) {
+export function LIST_SECRET(params) {
   return request({
-    url: "/search",
+    url: "/secrets",
     method: "get",
     params: params,
   });
