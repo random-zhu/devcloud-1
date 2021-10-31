@@ -127,6 +127,7 @@ export default {
         address: "",
         username: "",
         password: "",
+        allow_regions: [],
       },
       formLabelWidth: "80px",
       addSecretLoading: false,

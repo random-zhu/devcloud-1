@@ -2,13 +2,13 @@
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="/host"
-        :default-openeds="['/host']"
+        default-active="/cmdb/host"
+        :default-openeds="['/cmdb/host']"
         class="sidebar-el-menu"
         :collapse="isCollapse"
         router
       >
-        <el-submenu index="/host">
+        <el-submenu index="/cmdb/host">
           <!-- 添加个title -->
           <template slot="title">
             <i class="el-icon-location"></i>
@@ -18,6 +18,7 @@
           <el-menu-item index="/cmdb/search">资源检索</el-menu-item>
           <el-menu-item index="/cmdb/host/list">主机</el-menu-item>
         </el-submenu>
+
         <el-submenu index="/sync">
           <!-- 添加个title -->
           <template slot="title">
@@ -25,7 +26,7 @@
             <span slot="title">资源同步</span>
           </template>
           <!-- 导航条目 -->
-          <el-menu-item index="/cmdb/sync/list">凭证管理</el-menu-item>
+          <el-menu-item index="/cmdb/secret/list">凭证管理</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-scrollbar>

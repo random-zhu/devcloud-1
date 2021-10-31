@@ -41,12 +41,12 @@ const routes = [
       {
         path: "host/detail",
         component: () => import("@/views/cmdb/host/detail"),
-        name: "ResourceHost",
+        name: "HostDetail",
       },
       {
-        path: "sync/list",
+        path: "secret/list",
         component: () => import("@/views/cmdb/sync/index"),
-        name: "ResourceSync",
+        name: "SecretList",
       },
     ],
   },

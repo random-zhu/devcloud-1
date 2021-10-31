@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 .basic-info {
-  padding: 8px;
+  padding: 20px;
   background-color: white;
 }
 .associate-info {

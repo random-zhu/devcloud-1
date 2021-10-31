@@ -18,7 +18,7 @@
             <router-link
               :to="{ path: '/cmdb/host/detail', query: { id: row.id } }"
             >
-              {{ row.resource_id }}
+              {{ row.instance_id }}
             </router-link>
             <br />
             {{ row.name }}
@@ -93,7 +93,11 @@ export default {
   data() {
     return {
       tips: tips,
-      query: { page_size: 20, page_number: 1, keywords: "" },
+      query: {
+        page_size: 20,
+        page_number: 1,
+        keywords: "",
+      },
       fetchHostLoading: false,
       total: 0,
       hosts: [],
