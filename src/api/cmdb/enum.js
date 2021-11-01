@@ -15,3 +15,11 @@ export function LIST_CRENDENTIAL_TYPE(params) {
     params: params,
   });
 }
+
+export function LIST_REGION(params) {
+  return request({
+    url: "/regions",
+    method: "get",
+    params: params,
+  });
+}

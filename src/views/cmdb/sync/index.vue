@@ -83,6 +83,7 @@
       :visible.sync="showAddSecretDrawer"
       :vendors="vendors"
       :cendentialTypes="crendentialTypes"
+      :regions="regions"
     />
   </div>
 </template>
@@ -91,7 +92,11 @@
 import Tips from "@/components/Tips";
 import Pagination from "@/components/Pagination";
 import { LIST_SECRET } from "@/api/cmdb/secret";
-import { LIST_VENDOR, LIST_CRENDENTIAL_TYPE } from "@/api/cmdb/enum.js";
+import {
+  LIST_VENDOR,
+  LIST_CRENDENTIAL_TYPE,
+  LIST_REGION,
+} from "@/api/cmdb/enum.js";
 
 import AddSecret from "./components/AddSecret";
 
@@ -114,11 +119,13 @@ export default {
       showAddSecretDrawer: false,
       vendors: [],
       crendentialTypes: [],
+      regions: {},
     };
   },
   mounted() {
     this.getVendors();
     this.getCrendentialTypes();
+    this.getRegion();
     this.get_secrets();
   },
   methods: {
@@ -158,6 +165,17 @@ export default {
       } catch (error) {
         this.$notify.error({
           title: "获取凭证类型异常",
+          message: error,
+        });
+      }
+    },
+    async getRegion() {
+      try {
+        const resp = await LIST_REGION();
+        this.regions = resp.data;
+      } catch (error) {
+        this.$notify.error({
+          title: "获取Region类型异常",
           message: error,
         });
       }

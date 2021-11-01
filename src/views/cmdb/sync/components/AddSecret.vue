@@ -46,10 +46,19 @@
               ></el-input>
             </el-form-item>
             <el-form-item label="Region" :label-width="formLabelWidth">
-              <el-input
+              <el-select
                 v-model="form.allow_regions"
-                placeholder="请输入内容"
-              ></el-input>
+                multiple
+                placeholder="请选择Region"
+              >
+                <el-option
+                  v-for="item in regionOptions"
+                  :key="item.value"
+                  :label="item.describe"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
             </el-form-item>
           </div>
           <div v-if="form.crendential_type === 'CRENDENTIAL_PASSWORD'">
@@ -114,6 +123,12 @@ export default {
       },
       type: Array,
     },
+    regions: {
+      default() {
+        return [];
+      },
+      type: Array,
+    },
   },
   data() {
     return {
@@ -168,6 +183,11 @@ export default {
       },
       set(val) {
         this.$emit("update:visible", val);
+      },
+    },
+    regionOptions: {
+      get() {
+        return this.regions[this.form.vendor];
       },
     },
   },
