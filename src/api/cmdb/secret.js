@@ -7,3 +7,20 @@ export function LIST_SECRET(params) {
     params: params,
   });
 }
+
+export function ADD_SECRET(data, params) {
+  return request({
+    url: "/secrets",
+    method: "post",
+    data,
+    params,
+  });
+}
+
+export function DELETE_SECRET(id, params) {
+  return request({
+    url: `/secrets/${id}`,
+    method: "delete",
+    params,
+  });
+}

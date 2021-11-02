@@ -9,8 +9,12 @@
       size="40%"
     >
       <div class="add-secret-form">
-        <el-form ref="addSecretForm" :model="form">
-          <el-form-item label="厂商" :label-width="formLabelWidth">
+        <el-form ref="addSecretForm" :model="form" :rules="rules">
+          <el-form-item
+            label="厂商"
+            :label-width="formLabelWidth"
+            prop="vendor"
+          >
             <el-radio-group @change="changeVendor" v-model="form.vendor">
               <el-radio-button
                 v-for="item in vendors"
@@ -21,7 +25,11 @@
               </el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="类型" :label-width="formLabelWidth">
+          <el-form-item
+            label="类型"
+            :label-width="formLabelWidth"
+            prop="crendential_type"
+          >
             <el-radio-group disabled v-model="form.crendential_type">
               <el-radio-button
                 v-for="item in cendentialTypes"
@@ -33,22 +41,36 @@
             </el-radio-group>
           </el-form-item>
           <div v-if="form.crendential_type === 'CRENDENTIAL_API_KEY'">
-            <el-form-item label="API Key" :label-width="formLabelWidth">
+            <el-form-item
+              label="API Key"
+              :label-width="formLabelWidth"
+              prop="api_key"
+            >
               <el-input
                 v-model="form.api_key"
-                placeholder="请输入内容"
+                placeholder="请输入API Key"
               ></el-input>
             </el-form-item>
-            <el-form-item label="API Secret" :label-width="formLabelWidth">
+            <el-form-item
+              label="API Secret"
+              :label-width="formLabelWidth"
+              prop="api_secret"
+            >
               <el-input
                 v-model="form.api_secret"
-                placeholder="请输入内容"
+                placeholder="请输入API Secret"
+                type="password"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Region" :label-width="formLabelWidth">
+            <el-form-item
+              label="Region"
+              :label-width="formLabelWidth"
+              prop="allow_regions"
+            >
               <el-select
                 v-model="form.allow_regions"
                 multiple
+                filterable
                 placeholder="请选择Region"
               >
                 <el-option
@@ -62,22 +84,35 @@
             </el-form-item>
           </div>
           <div v-if="form.crendential_type === 'CRENDENTIAL_PASSWORD'">
-            <el-form-item label="Address" :label-width="formLabelWidth">
+            <el-form-item
+              label="服务地址"
+              :label-width="formLabelWidth"
+              prop="address"
+            >
               <el-input
                 v-model="form.address"
-                placeholder="请输入内容"
+                placeholder="请输入服务地址"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Username" :label-width="formLabelWidth">
+            <el-form-item
+              label="用户名"
+              :label-width="formLabelWidth"
+              prop="username"
+            >
               <el-input
                 v-model="form.username"
-                placeholder="请输入内容"
+                placeholder="请输入用户名"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Password" :label-width="formLabelWidth">
+            <el-form-item
+              label="密码"
+              :label-width="formLabelWidth"
+              prop="password"
+            >
               <el-input
                 v-model="form.password"
-                placeholder="请输入内容"
+                placeholder="请输入密码"
+                type="password"
               ></el-input>
             </el-form-item>
           </div>
@@ -85,6 +120,16 @@
             <el-input
               v-model="form.request_rate"
               placeholder="请输入内容"
+            ></el-input>
+          </el-form-item>
+          <el-form-item
+            label="描述"
+            :label-width="formLabelWidth"
+            prop="description"
+          >
+            <el-input
+              v-model="form.description"
+              placeholder="请输入凭证描述"
             ></el-input>
           </el-form-item>
         </el-form>
@@ -104,6 +149,8 @@
 </template>
 
 <script>
+import { ADD_SECRET } from "@/api/cmdb/secret.js";
+
 export default {
   name: "AddSecret",
   props: {
@@ -125,9 +172,9 @@ export default {
     },
     regions: {
       default() {
-        return [];
+        return {};
       },
-      type: Array,
+      type: Object,
     },
   },
   data() {
@@ -138,14 +185,32 @@ export default {
         crendential_type: "",
         api_key: "",
         api_secret: "",
-        request_rate: 0.2,
+        request_rate: 3,
         address: "",
         username: "",
         password: "",
         allow_regions: [],
       },
-      formLabelWidth: "80px",
+      formLabelWidth: "120px",
       addSecretLoading: false,
+      rules: {
+        api_key: [
+          { required: true, message: "请输入API Key", trigger: "blur" },
+        ],
+        api_secret: [
+          { required: true, message: "请输入API Secret", trigger: "blur" },
+        ],
+        address: [
+          { required: true, message: "请输入服务地址", trigger: "blur" },
+        ],
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+        ],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        description: [
+          { required: true, message: "请输入凭证描述", trigger: "blur" },
+        ],
+      },
     };
   },
   watch: {
@@ -161,9 +226,11 @@ export default {
   },
   methods: {
     handleClose() {
+      this.$refs["addSecretForm"].clearValidate();
       this.$emit("update:visible", false);
     },
     cancelForm() {
+      this.$refs["addSecretForm"].clearValidate();
       this.addSecretLoading = false;
       this.$emit("update:visible", false);
     },
@@ -173,8 +240,28 @@ export default {
       } else {
         this.form.crendential_type = "CRENDENTIAL_API_KEY";
       }
+      this.form.allow_regions = [];
     },
-    submit() {},
+    submit() {
+      this.$refs["addSecretForm"].validate(async (valid) => {
+        if (valid) {
+          this.addSecretLoading = true;
+          try {
+            let resp = await ADD_SECRET(this.form);
+            this.$emit("created", resp);
+            this.$emit("update:visible", false);
+            this.$refs["addSecretForm"].resetFields();
+          } catch (error) {
+            this.$notify.error({
+              title: "创建凭证异常",
+              message: error,
+            });
+          } finally {
+            this.addSecretLoading = false;
+          }
+        }
+      });
+    },
   },
   computed: {
     isVisible: {

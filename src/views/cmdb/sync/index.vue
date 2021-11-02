@@ -61,10 +61,16 @@
           </template>
         </el-table-column>
         <el-table-column prop="操作" align="center" label="操作">
-          <template>
-            <el-button type="text" disabled>删除</el-button>
-            <el-button type="text" disabled>禁用</el-button>
-            <el-button type="text" disabled>测试</el-button>
+          <template slot-scope="{ row, $index }">
+            <el-button
+              type="text"
+              icon="el-icon-delete"
+              style="color: #f56c6c"
+              @click="handleDelete(row, $index)"
+              :loading="deleteSecretLoading === $index"
+              >删除</el-button
+            >
+            <el-button type="text" icon="el-icon-refresh">同步</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -84,6 +90,7 @@
       :vendors="vendors"
       :cendentialTypes="crendentialTypes"
       :regions="regions"
+      @created="handleCreated"
     />
   </div>
 </template>
@@ -91,7 +98,7 @@
 <script>
 import Tips from "@/components/Tips";
 import Pagination from "@/components/Pagination";
-import { LIST_SECRET } from "@/api/cmdb/secret";
+import { LIST_SECRET, DELETE_SECRET } from "@/api/cmdb/secret";
 import {
   LIST_VENDOR,
   LIST_CRENDENTIAL_TYPE,
@@ -120,6 +127,7 @@ export default {
       vendors: [],
       crendentialTypes: [],
       regions: {},
+      deleteSecretLoading: -1,
     };
   },
   mounted() {
@@ -199,6 +207,35 @@ export default {
           break;
       }
       return showVendor;
+    },
+    handleCreated(val) {
+      console.log(val);
+      this.get_secrets();
+    },
+    handleDelete(row, index) {
+      this.$confirm("此操作将永久删除该凭证, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(async () => {
+        this.deleteSecretLoading = index;
+        try {
+          let resp = await DELETE_SECRET(row.id);
+          console.log(resp);
+          this.get_secrets();
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        } catch (error) {
+          this.$message({
+            type: "error",
+            message: error,
+          });
+        } finally {
+          this.deleteSecretLoading = -1;
+        }
+      });
     },
   },
 };
