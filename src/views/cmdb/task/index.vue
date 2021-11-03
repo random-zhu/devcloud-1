@@ -12,8 +12,11 @@
         ></el-input>
       </div>
       <div class="op">
-        <el-button icon="el-icon-plus" type="primary" @click="handleAddSecret"
-          >添加凭证</el-button
+        <el-button
+          icon="el-icon-refresh"
+          type="primary"
+          @click="handleAddSecret"
+          >资产同步</el-button
         >
       </div>
     </div>
@@ -70,7 +73,6 @@
               :loading="deleteSecretLoading === $index"
               >删除</el-button
             >
-            <el-button type="text" icon="el-icon-refresh">同步</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -85,7 +87,7 @@
     </div>
 
     <!-- 添加secret -->
-    <add-secret
+    <create-task
       :visible.sync="showAddSecretDrawer"
       :vendors="vendors"
       :cendentialTypes="crendentialTypes"
@@ -105,13 +107,13 @@ import {
   LIST_REGION,
 } from "@/api/cmdb/enum.js";
 
-import AddSecret from "./components/AddSecret";
+import CreateTask from "./components/CreateTask";
 
 const tips = ["资源同步凭证管理"];
 
 export default {
-  name: "ResourceSync",
-  components: { Tips, Pagination, AddSecret },
+  name: "TaskList",
+  components: { Tips, Pagination, CreateTask },
   data() {
     return {
       tips,

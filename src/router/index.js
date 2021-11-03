@@ -45,8 +45,13 @@ const routes = [
       },
       {
         path: "secret/list",
-        component: () => import("@/views/cmdb/sync/index"),
+        component: () => import("@/views/cmdb/secret/index"),
         name: "SecretList",
+      },
+      {
+        path: "task/list",
+        component: () => import("@/views/cmdb/task/index"),
+        name: "TaskList",
       },
     ],
   },

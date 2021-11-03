@@ -185,7 +185,7 @@ export default {
         crendential_type: "",
         api_key: "",
         api_secret: "",
-        request_rate: 3,
+        request_rate: 5,
         address: "",
         username: "",
         password: "",
