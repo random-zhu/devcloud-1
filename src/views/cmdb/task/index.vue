@@ -7,7 +7,7 @@
       <div class="search">
         <el-input
           v-model="query.keywords"
-          placeholder="请输入凭证描述|API KEY|用户名 敲回车进行搜索"
+          placeholder="请输入凭证描述敲回车进行搜索"
           @keyup.enter.native="get_tasks"
         ></el-input>
       </div>
@@ -47,7 +47,10 @@
         <el-table-column prop="status" label="状态">
           <template slot-scope="{ row }">
             {{ row.status }} <br />
-            <el-tooltip placement="bottom">
+            <div v-if="row.message.length <= 40">
+              <span>{{ row.message }}</span>
+            </div>
+            <el-tooltip v-else placement="bottom">
               <div slot="content">{{ row.message }}</div>
               <span>{{ row.message.substring(0, 40) + " ..." }}</span>
             </el-tooltip>
@@ -74,6 +77,7 @@
     <create-task
       :visible.sync="showCreateTaskDrawer"
       :regions="regions"
+      :resourceTypes="resourceTypes"
       @created="handleCreated"
     />
   </div>
@@ -83,7 +87,7 @@
 import Tips from "@/components/Tips";
 import Pagination from "@/components/Pagination";
 import { LIST_TASK } from "@/api/cmdb/task";
-import { LIST_REGION } from "@/api/cmdb/enum.js";
+import { LIST_REGION, LIST_RESOURCE_TYPE } from "@/api/cmdb/enum.js";
 
 import CreateTask from "./components/CreateTask";
 
@@ -105,10 +109,12 @@ export default {
       },
       showCreateTaskDrawer: false,
       regions: {},
+      resourceTypes: {},
     };
   },
   mounted() {
-    this.getRegion();
+    this.get_regions();
+    this.get_resource_types();
     this.get_tasks();
   },
   methods: {
@@ -120,7 +126,7 @@ export default {
         this.total = resp.data.total;
       } catch (error) {
         this.$notify.error({
-          title: "获取凭证异常",
+          title: "获取任务异常",
           message: error,
         });
       } finally {
@@ -130,7 +136,7 @@ export default {
     handleAddSecret() {
       this.showCreateTaskDrawer = true;
     },
-    async getRegion() {
+    async get_regions() {
       try {
         const resp = await LIST_REGION();
         this.regions = resp.data;
@@ -141,8 +147,18 @@ export default {
         });
       }
     },
-    handleCreated(val) {
-      console.log(val);
+    async get_resource_types() {
+      try {
+        const resp = await LIST_RESOURCE_TYPE();
+        this.resourceTypes = resp.data;
+      } catch (error) {
+        this.$notify.error({
+          title: "获取资源类型异常",
+          message: error,
+        });
+      }
+    },
+    handleCreated() {
       this.get_tasks();
     },
   },

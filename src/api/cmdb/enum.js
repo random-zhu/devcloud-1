@@ -23,3 +23,11 @@ export function LIST_REGION(params) {
     params: params,
   });
 }
+
+export function LIST_RESOURCE_TYPE(params) {
+  return request({
+    url: "/resource_types",
+    method: "get",
+    params: params,
+  });
+}
