@@ -15,7 +15,7 @@
         <el-button
           icon="el-icon-refresh"
           type="primary"
-          @click="handleAddSecret"
+          @click="handleCreateTask"
           >资产同步</el-button
         >
       </div>
@@ -133,7 +133,7 @@ export default {
         this.fetchTaskLoading = false;
       }
     },
-    handleAddSecret() {
+    handleCreateTask() {
       this.showCreateTaskDrawer = true;
     },
     async get_regions() {

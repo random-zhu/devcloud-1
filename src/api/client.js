@@ -3,7 +3,7 @@ import axios from "axios";
 // http client
 const client = axios.create({
   // API请求的base URL
-  baseURL: "http://localhost:8050",
+  baseURL: process.env.VUE_APP_BASE_API,
   // 超时时间
   timeout: 5000,
 });

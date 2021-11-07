@@ -16,49 +16,49 @@
         <el-table-column prop="name" label="名称">
           <template slot-scope="{ row }">
             <router-link
-              :to="{ path: '/cmdb/host/detail', query: { id: row.id } }"
+              :to="{ path: '/cmdb/host/detail', query: { id: row.base.id } }"
             >
-              {{ row.instance_id }}
+              {{ row.base.instance_id }}
             </router-link>
             <br />
-            {{ row.name }}
+            {{ row.information.name }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="资产来源">
           <template slot-scope="{ row }">
-            {{ row.vendor }} <br />
-            {{ row.region }}
+            {{ row.base.vendor }} <br />
+            {{ row.base.region }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="内网IP/外网IP">
           <template slot-scope="{ row }">
-            {{ row.private_ip }} <br />
-            {{ row.public_ip }}
+            {{ row.information.private_ip }} <br />
+            {{ row.information.public_ip }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="系统类型">
           <template slot-scope="{ row }">
-            {{ row.os_name }}
+            {{ row.describe.os_name }}
           </template>
         </el-table-column>
         <el-table-column prop="sync_at" label="创建时间">
           <template slot-scope="scope">
-            {{ scope.row.create_at | parseTime }}
+            {{ scope.row.base.create_at | parseTime }}
           </template>
         </el-table-column>
         <el-table-column prop="expire_at" label="过期时间">
           <template slot-scope="scope">
-            {{ scope.row.expire_at | parseTime }}
+            {{ scope.row.information.expire_at | parseTime }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="规格">
           <template slot-scope="{ row }">
-            {{ row.cpu }} / {{ row.memory }}
+            {{ row.describe.cpu }} / {{ row.describe.memory }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="状态">
           <template slot-scope="{ row }">
-            {{ row.status }}
+            {{ row.information.status }}
           </template>
         </el-table-column>
         <el-table-column prop="操作" align="center" label="状态">

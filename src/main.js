@@ -24,6 +24,8 @@ Vue.use(Element, {
   size: "mini",
 });
 
+console.log("env", process.env.NODE_ENV);
+
 new Vue({
   router,
   store,

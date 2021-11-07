@@ -4,46 +4,46 @@
     <div class="box-shadow basic-info">
       <el-descriptions title="主机信息">
         <el-descriptions-item label="名称">
-          {{ host.name }}
+          {{ host.information.name }}
         </el-descriptions-item>
         <el-descriptions-item label="实例ID">
-          {{ host.instance_id }}
+          {{ host.base.instance_id }}
         </el-descriptions-item>
         <el-descriptions-item label="状态">
-          {{ host.status }}
+          {{ host.information.status }}
         </el-descriptions-item>
         <el-descriptions-item label="规格">
-          {{ host.cpu }} / {{ host.memory }}
+          {{ host.describe.cpu }} / {{ host.describe.memory }}
         </el-descriptions-item>
         <el-descriptions-item label="厂商">
-          {{ host.vendor }}
+          {{ host.base.vendor }}
         </el-descriptions-item>
         <el-descriptions-item label="系统">
-          {{ host.os_name }}
+          {{ host.describe.os_name }}
         </el-descriptions-item>
         <el-descriptions-item label="地域">
-          {{ host.region }}
+          {{ host.base.region }}
         </el-descriptions-item>
         <el-descriptions-item label="创建时间">
-          {{ host.create_at | parseTime }}
+          {{ host.base.create_at | parseTime }}
         </el-descriptions-item>
         <el-descriptions-item label="序列号">
-          {{ host.serial_number }}
+          {{ host.describe.serial_number }}
         </el-descriptions-item>
         <el-descriptions-item label="过期时间">
-          {{ host.expire_at | parseTime }}
+          {{ host.information.expire_at | parseTime }}
         </el-descriptions-item>
         <el-descriptions-item label="同步时间">
-          {{ host.sync_at | parseTime }}
+          {{ host.base.sync_at | parseTime }}
         </el-descriptions-item>
         <el-descriptions-item label="同步账号">
-          {{ host.sync_account }}
+          {{ host.information.sync_account }}
         </el-descriptions-item>
         <el-descriptions-item label="内网IP">
-          {{ host.private_ip.join(",") }}
+          {{ host.information.private_ip.join(",") }}
         </el-descriptions-item>
         <el-descriptions-item label="公网IP">
-          {{ host.public_ip.join(",") }}
+          {{ host.information.public_ip.join(",") }}
         </el-descriptions-item>
       </el-descriptions>
     </div>

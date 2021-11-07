@@ -20,39 +20,39 @@
       >
         <el-table-column prop="name" label="名称">
           <template slot-scope="{ row }">
-            {{ row.name }}
+            {{ row.information.name }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="资产来源">
           <template slot-scope="{ row }">
-            {{ row.vendor }} <br />
-            {{ row.region }}
+            {{ row.base.vendor }} <br />
+            {{ row.base.region }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="内网IP/外网IP">
           <template slot-scope="{ row }">
-            {{ row.private_ip }} <br />
-            {{ row.public_ip }}
+            {{ row.information.private_ip }} <br />
+            {{ row.information.public_ip }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="同步时间">
           <template slot-scope="{ row }">
-            {{ row.sync_at | parseTime }}
+            {{ row.base.sync_at | parseTime }}
           </template>
         </el-table-column>
         <el-table-column prop="sync_at" label="创建时间">
           <template slot-scope="scope">
-            {{ scope.row.create_at | parseTime }}
+            {{ scope.row.base.create_at | parseTime }}
           </template>
         </el-table-column>
         <el-table-column prop="expire_at" label="过期时间">
           <template slot-scope="scope">
-            {{ scope.row.expire_at | parseTime }}
+            {{ scope.row.information.expire_at | parseTime }}
           </template>
         </el-table-column>
         <el-table-column prop="name" label="状态">
           <template slot-scope="{ row }">
-            {{ row.status }}
+            {{ row.information.status }}
           </template>
         </el-table-column>
       </el-table>

@@ -40,7 +40,7 @@
               </el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <div v-if="form.crendential_type === 'CRENDENTIAL_API_KEY'">
+          <div v-if="form.crendential_type === 'API_KEY'">
             <el-form-item
               label="API Key"
               :label-width="formLabelWidth"
@@ -83,7 +83,7 @@
               </el-select>
             </el-form-item>
           </div>
-          <div v-if="form.crendential_type === 'CRENDENTIAL_PASSWORD'">
+          <div v-if="form.crendential_type === 'PASSWORD'">
             <el-form-item
               label="服务地址"
               :label-width="formLabelWidth"
@@ -235,10 +235,10 @@ export default {
       this.$emit("update:visible", false);
     },
     changeVendor(val) {
-      if (val === "VENDOR_VSPHERE") {
-        this.form.crendential_type = "CRENDENTIAL_PASSWORD";
+      if (val === "VSPHERE") {
+        this.form.crendential_type = "PASSWORD";
       } else {
-        this.form.crendential_type = "CRENDENTIAL_API_KEY";
+        this.form.crendential_type = "API_KEY";
       }
       this.form.allow_regions = [];
     },
