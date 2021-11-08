@@ -1,8 +1,9 @@
 import request from "@/api/client";
+import cmdb from "./settings";
 
 export function LIST_VENDOR(params) {
   return request({
-    url: "/vendors",
+    url: `${cmdb.baseURL}/vendors`,
     method: "get",
     params: params,
   });
@@ -10,7 +11,7 @@ export function LIST_VENDOR(params) {
 
 export function LIST_CRENDENTIAL_TYPE(params) {
   return request({
-    url: "/crendential_types",
+    url: `${cmdb.baseURL}/crendential_types`,
     method: "get",
     params: params,
   });
@@ -18,7 +19,7 @@ export function LIST_CRENDENTIAL_TYPE(params) {
 
 export function LIST_REGION(params) {
   return request({
-    url: "/regions",
+    url: `${cmdb.baseURL}/regions`,
     method: "get",
     params: params,
   });
@@ -26,7 +27,7 @@ export function LIST_REGION(params) {
 
 export function LIST_RESOURCE_TYPE(params) {
   return request({
-    url: "/resource_types",
+    url: `${cmdb.baseURL}/resource_types`,
     method: "get",
     params: params,
   });

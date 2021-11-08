@@ -1,8 +1,9 @@
 import request from "@/api/client";
+import cmdb from "./settings";
 
 export function LIST_HOST(params) {
   return request({
-    url: "/hosts",
+    url: `${cmdb.baseURL}/hosts`,
     method: "get",
     params: params,
   });
@@ -10,7 +11,7 @@ export function LIST_HOST(params) {
 
 export function GET_HOST(id, params) {
   return request({
-    url: `/hosts/${id}`,
+    url: `${cmdb.baseURL}/hosts/${id}`,
     method: "get",
     params: params,
   });

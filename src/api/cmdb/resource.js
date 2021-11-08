@@ -1,8 +1,9 @@
 import request from "@/api/client";
+import cmdb from "./settings";
 
 export function SEARCH(params) {
   return request({
-    url: "/search",
+    url: `${cmdb.baseURL}/search`,
     method: "get",
     params: params,
   });
