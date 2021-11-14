@@ -36,6 +36,20 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+    proxy: {
+      "/keyauth/api/v1": {
+        target: "http://localhost:8050",
+        ws: true,
+        secure: false,
+        changeOrigin: true,
+      },
+      "/cmdb/api/v1": {
+        target: "http://localhost:8060",
+        ws: true,
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

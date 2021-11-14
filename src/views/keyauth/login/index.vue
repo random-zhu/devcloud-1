@@ -113,7 +113,7 @@ export default {
             const user = await this.$store.dispatch("user/getInfo");
             console.log(user);
           } catch (error) {
-            console.log(error);
+            this.$message.error(`登录失败: ${error}`);
             return;
           } finally {
             this.loading = false;

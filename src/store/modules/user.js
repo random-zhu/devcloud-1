@@ -1,4 +1,4 @@
-import { LOGIN, GET_PROFILE } from "@/api/keyauth/token";
+import { LOGIN, LOGOUT, GET_PROFILE } from "@/api/keyauth/token";
 
 const state = {
   accessToken: "",
@@ -29,14 +29,22 @@ const actions = {
   // 用户登陆接口
   login({ commit }, loginForm) {
     return new Promise((resolve, reject) => {
-      const resp = LOGIN(loginForm);
-      commit("SET_TOKEN", resp.data);
-      resolve(resp);
+      LOGIN(loginForm)
+        .then((resp) => {
+          commit("SET_TOKEN", resp.data);
+          resolve(resp);
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   },
 
   logout({ commit }) {
     return new Promise((resolve, reject) => {
+      LOGOUT().catch((error) => {
+        reject(error);
+      });
       commit("CLEAN_TOEKN");
       resolve();
     });
@@ -45,9 +53,14 @@ const actions = {
   // 获取用户Profile
   getInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      const resp = GET_PROFILE();
-      commit("SET_PROFILE", resp.data);
-      resolve(resp);
+      GET_PROFILE()
+        .then((resp) => {
+          commit("SET_PROFILE", resp.data);
+          resolve(resp);
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   },
 };

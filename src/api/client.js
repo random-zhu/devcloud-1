@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "@/store";
 
 // http client
 const client = axios.create({
@@ -12,6 +13,10 @@ const client = axios.create({
 client.interceptors.request.use(
   // 成功的处理逻辑
   (request) => {
+    // 如果有Token, 带上Token访问
+    if (store.getters.accessToken) {
+      request.headers["X-OAUTH-TOKEN"] = store.getters.accessToken;
+    }
     return request;
   },
   // 错误时的处理逻辑
@@ -37,7 +42,14 @@ client.interceptors.response.use(
   (err) => {
     // 错误时的处理逻辑
     console.log(err);
-    return Promise.reject(err);
+
+    var message = err;
+    if (err.response) {
+      const res = err.response.data;
+      message = res.reason + ": " + res.message;
+    }
+
+    return Promise.reject(message);
   }
 );
 

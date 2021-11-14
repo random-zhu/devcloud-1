@@ -1,21 +1,36 @@
-export function LOGIN(data) {
-  console.log(data);
-  return {
-    code: 0,
-    data: {
-      access_token: "mock ak",
-      namespace: "mock namespace",
+import request from "@/api/client";
+import keyauth from "./settings";
+
+export function LOGIN(data, params) {
+  return request({
+    url: `${keyauth.baseURL}/oauth2/tokens`,
+    method: "post",
+    auth: {
+      username: process.env.VUE_APP_CLIENT_ID,
+      password: process.env.VUE_APP_CLIENT_SECRET,
     },
-  };
+    data,
+    params,
+  });
 }
 
-export function GET_PROFILE() {
-  return {
-    code: 0,
-    data: {
-      account: "mock account",
-      type: "mock type",
-      profile: { real_name: "real name", avatar: "mock avatar" },
+export function LOGOUT(data, params) {
+  return request({
+    url: `${keyauth.baseURL}/oauth2/tokens`,
+    method: "delete",
+    auth: {
+      username: process.env.VUE_APP_CLIENT_ID,
+      password: process.env.VUE_APP_CLIENT_SECRET,
     },
-  };
+    data,
+    params,
+  });
+}
+
+export function GET_PROFILE(params) {
+  return request({
+    url: `${keyauth.baseURL}/profile`,
+    method: "get",
+    params,
+  });
 }
