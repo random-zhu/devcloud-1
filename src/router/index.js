@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { beforeEach, afterEach } from "./permission";
-import Layout from "../layout";
+import cmdbRoutes from "./system/cmdb";
+import adminRoutes from "./system/admin";
+import Layout from "@/layout";
 
 Vue.use(VueRouter);
 
@@ -23,38 +25,10 @@ const routes = [
     name: "Login",
     component: () => import("../views/keyauth/login/new.vue"),
   },
-  {
-    path: "/cmdb",
-    component: Layout,
-    redirect: "/cmdb/search",
-    children: [
-      {
-        path: "search",
-        component: () => import("@/views/cmdb/search/index"),
-        name: "ResourceSearch",
-      },
-      {
-        path: "host/list",
-        component: () => import("@/views/cmdb/host/index"),
-        name: "ResourceHost",
-      },
-      {
-        path: "host/detail",
-        component: () => import("@/views/cmdb/host/detail"),
-        name: "HostDetail",
-      },
-      {
-        path: "secret/list",
-        component: () => import("@/views/cmdb/secret/index"),
-        name: "SecretList",
-      },
-      {
-        path: "task/list",
-        component: () => import("@/views/cmdb/task/index"),
-        name: "TaskList",
-      },
-    ],
-  },
+  // cmdb 路由
+  cmdbRoutes,
+  // admin 路由
+  adminRoutes,
   {
     path: "/404",
     component: () => import("@/views/common/error-page/404"),

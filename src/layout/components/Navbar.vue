@@ -102,6 +102,17 @@ export default {
   methods: {
     changeSystem(system) {
       this.$store.dispatch("app/setSystem", system);
+
+      switch (system) {
+        case "cmdb":
+          this.$router.push({ path: "/cmdb/search" });
+          break;
+        case "admin":
+          this.$router.push({ path: "/admin/micro/list" });
+          break;
+        default:
+          break;
+      }
     },
     toggleSideBar() {
       this.$store.dispatch("app/toggleSideBar");

@@ -1,8 +1,8 @@
 <template>
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <el-scrollbar wrap-class="scrollbar-wrapper">
-      <cmdb-menu v-show="isSystem('cmdb')" />
-      <admin-menu v-show="isSystem('admin')" />
+      <cmdb-menu :isCollapse="isCollapse" v-show="isSystem('cmdb')" />
+      <admin-menu :isCollapse="isCollapse" v-show="isSystem('admin')" />
     </el-scrollbar>
   </div>
 </template>
@@ -50,5 +50,9 @@ export default {
 <style lang="scss" scoped>
 .sidebar-el-menu {
   height: calc(100vh - 50px);
+}
+
+.sidebar {
+  height: 100vh;
 }
 </style>

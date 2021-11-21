@@ -35,5 +35,11 @@
 <script>
 export default {
   name: "CmdbMenu",
+  props: {
+    isCollapse: {
+      required: true,
+      type: Boolean,
+    },
+  },
 };
 </script>
