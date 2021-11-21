@@ -45,9 +45,17 @@
     </div>
     <!-- 用户信息区 -->
     <div class="navbar-user">
+      <el-button
+        type="text"
+        @click="changeSystem('admin')"
+        class="system-management"
+      >
+        <i class="el-icon-s-tools" />
+        <span>系统管理</span>
+      </el-button>
       <el-dropdown>
         <el-button type="text" style="color: white">
-          <span>老喻</span>
+          <span>{{ username }}</span>
           <i class="el-icon-arrow-down el-icon--right dropdown-color" />
         </el-button>
         <el-dropdown-menu slot="dropdown">
@@ -86,6 +94,9 @@ export default {
     },
     activeSystem() {
       return this.$store.getters.system;
+    },
+    username() {
+      return this.$store.getters.account;
     },
   },
   methods: {
@@ -150,6 +161,12 @@ export default {
 }
 
 .navbar-user {
+  display: flex;
   margin-left: auto;
+}
+
+.system-management {
+  color: white;
+  margin-right: 12px;
 }
 </style>
