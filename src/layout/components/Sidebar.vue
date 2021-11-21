@@ -53,6 +53,6 @@ export default {
 }
 
 .sidebar {
-  height: 100vh;
+  height: calc(100vh - 50px);
 }
 </style>
