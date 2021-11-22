@@ -61,8 +61,12 @@
         <el-dropdown-menu slot="dropdown">
           <!-- 个人信息 -->
           <el-dropdown-item>
-            <svg-icon icon-class="person" />
-            <span class="dropdown-item-text">基本信息</span>
+            <router-link to="/profile/index">
+              <el-dropdown-item>
+                <svg-icon icon-class="person" />
+                <span class="dropdown-item-text">基本信息</span>
+              </el-dropdown-item>
+            </router-link>
           </el-dropdown-item>
           <!-- 项目地址 -->
           <el-dropdown-item>

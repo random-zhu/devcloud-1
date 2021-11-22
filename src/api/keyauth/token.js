@@ -27,6 +27,26 @@ export function LOGOUT(data, params) {
   });
 }
 
+export function QUERY_TOKEN(query) {
+  return request({
+    url: `${keyauth.baseURL}/self/tokens/`,
+    method: "get",
+    params: query,
+  });
+}
+
+export function DELETE_TOKEN(data) {
+  return request({
+    url: `${keyauth.baseURL}/self/tokens/`,
+    method: "delete",
+    auth: {
+      username: process.env.VUE_APP_CLIENT_ID,
+      password: process.env.VUE_APP_CLIENT_SECRET,
+    },
+    data,
+  });
+}
+
 export function SEND_VERIFY_CODE_BY_PASS(data) {
   return request({
     url: `/${keyauth.baseURL}/verify_code/pass/`,

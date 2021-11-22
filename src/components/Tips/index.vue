@@ -52,6 +52,7 @@ export default {
   color: rgb(20, 105, 105);
   font-size: 12px;
   padding: 8px 16px;
+  margin-bottom: 12px;
 }
 
 .titile {

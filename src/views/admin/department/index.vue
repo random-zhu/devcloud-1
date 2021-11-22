@@ -74,9 +74,9 @@
 
 <script>
 import {
-  queryDepartment,
-  querySubDepartment,
-  createDepartment,
+  QUERY_DEPARTMENT,
+  QUERY_SUB_DEPARTMENT,
+  CREATE_DEPARTMENT,
 } from "@/api/keyauth/department";
 import DepartmentDetail from "./detail";
 import ChoiceSubuser from "@/components/ChoiceSubuser";
@@ -138,7 +138,7 @@ export default {
       // 获取子部门
       if (node.level >= 1) {
         this.nodeResolve.id = resolve;
-        const resp = await querySubDepartment(node.data.id, this.listQuery);
+        const resp = await QUERY_SUB_DEPARTMENT(node.data.id, this.listQuery);
         const list = [];
         resp.data.items.forEach((item) => {
           item.leaf = item.sub_count === 0;
@@ -150,7 +150,7 @@ export default {
     getDepartmentList() {
       // 获取顶层部门
       this.listQuery.parent_id = ".";
-      queryDepartment(this.listQuery).then((resp) => {
+      QUERY_DEPARTMENT(this.listQuery).then((resp) => {
         this.departmentList = [];
         resp.data.items.forEach((item) => {
           item.leaf = item.sub_count === 0;
@@ -200,7 +200,7 @@ export default {
     async create() {
       this.createLoading = true;
       try {
-        var resp = await createDepartment(this.form);
+        var resp = await CREATE_DEPARTMENT(this.form);
         resp.data.leaf = true;
         this.departmentList.unshift(resp.data);
         this.dialogFormVisible = false;

@@ -23,7 +23,24 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import("../views/keyauth/login/new.vue"),
+    component: () => import("../views/keyauth/login/index.vue"),
+  },
+  {
+    path: "/profile",
+    component: Layout,
+    redirect: "/profile/index",
+    children: [
+      {
+        path: "index",
+        name: "ProfileIndex",
+        component: () => import("../views/keyauth/profile/index.vue"),
+      },
+      {
+        path: "init",
+        name: "ProfileInit",
+        component: () => import("../views/keyauth/profile/initial.vue"),
+      },
+    ],
   },
   // cmdb 路由
   cmdbRoutes,

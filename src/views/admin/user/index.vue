@@ -140,7 +140,7 @@
 import { QUERY_SUB_ACCOUNT, DELETE_SUB_ACCOUNT } from "@/api/keyauth/user";
 import { QUERY_DEPARTMENT } from "@/api/keyauth/department";
 import Pagination from "@/components/Pagination";
-import CreateAccountDrawer from "../department/components/ChoiceDepartment.vue";
+import CreateAccountDrawer from "@/components/ChoiceDepartment";
 import Tips from "@/components/Tips";
 
 const tips = ["用户可以将 邮箱地址/电话号码 作为用户名登录"];
