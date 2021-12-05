@@ -3,11 +3,12 @@
     <div>
       <tips :tips="tips" />
     </div>
-    <div class="filter-container">
-      <div class="filter-item">
+
+    <!-- 表格功能区 -->
+    <div class="table-operate-zone">
+      <div class="table-search">
         <el-input
           v-model="filterValue"
-          class="input-with-select filter-search-input"
           clearable
           placeholder="按回车进行搜索"
           @clear="clearSearch"
@@ -20,8 +21,7 @@
           </el-select>
         </el-input>
       </div>
-
-      <div class="filter-item fr">
+      <div class="table-operate">
         <el-button type="primary" size="mini" @click="handleCreateAction">
           新增单元
         </el-button>

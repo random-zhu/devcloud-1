@@ -3,7 +3,7 @@ import workflow from "./settings";
 
 export function QUERY_DEPLOY(query) {
   return request({
-    url: `${workflow}/deploys`,
+    url: `${workflow.baseURL}/deploys`,
     method: "get",
     params: query,
   });
